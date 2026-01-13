@@ -10,7 +10,6 @@ export default function useKey({
   useEffect(
     function () {
       function callback(e: KeyboardEvent) {
-        console.log(e);
         if (e.code.toLowerCase() === key.toLowerCase()) action('');
       }
 
