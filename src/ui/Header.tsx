@@ -1,4 +1,3 @@
-import React from 'react';
 import Logo from './Logo';
 import SearchBox from '../features/movies/SearchBox';
 import FoundResults from './FoundResults';

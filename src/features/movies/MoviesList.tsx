@@ -8,7 +8,7 @@ export default function MoviesList() {
   if (status !== 'success') return;
 
   return (
-    <ul className="h-full overflow-scroll">
+    <ul className="h-full overflow-scroll py-2">
       {movies.map((movie) => (
         <Movie movie={movie} />
       ))}

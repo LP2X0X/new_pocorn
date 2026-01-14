@@ -7,15 +7,15 @@ type MovieProps = {
 
 export default function Movie({ movie }: MovieProps) {
   return (
-    <li className="text-text grid grid-cols-[1fr_3fr]">
+    <li className="text-text first:border-t-background-100 border-b-background-100 grid grid-cols-[1fr_3fr] grid-rows-2 gap-x-5 border-b px-3 py-2 first:border-t">
       <img
         src={movie.Poster}
         alt={`${movie.Title} Movie Poster`}
         className="row-span-full h-auto max-w-full"
       />
-      <h3>{movie.Title}</h3>
-      <p>
-        <span>&#128197;</span>
+      <h3 className="col-2 row-1 text-xl font-semibold">{movie.Title}</h3>
+      <p className="col-2 row-2">
+        <span>&#128197; </span>
         {movie.Year}
       </p>
     </li>
