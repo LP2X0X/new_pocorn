@@ -13,7 +13,7 @@ export default function SearchBox() {
     inputRef.current?.focus();
   }, []);
 
-  useKey({ key: 'Enter', action: setQuery });
+  useKey({ key: 'Enter', action: clearAndFocusSearchBox });
 
   useEffect(() => {
     if (query === '') {
@@ -25,6 +25,13 @@ export default function SearchBox() {
 
     return () => promise.abort();
   }, [query, dispatch]);
+
+  function clearAndFocusSearchBox(): void {
+    if (document.activeElement === inputRef.current) return;
+
+    setQuery('');
+    inputRef.current?.focus();
+  }
 
   return (
     <input

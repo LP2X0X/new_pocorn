@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { getMovies } from '../services/apiMovies';
 
-const PUBLIC_KEY = '4869cc13';
-
-type Movie = {
+export type Movie = {
   Poster: string;
   Title: string;
   Type: string;
@@ -15,20 +14,7 @@ type Status = 'idle' | 'loading' | 'success' | 'error';
 export const fetchMovies = createAsyncThunk(
   `movies/fetchMovies`,
   async (query: string, thunkAPI) => {
-    const res = await fetch(
-      `http://www.omdbapi.com/?apikey=${PUBLIC_KEY}&s=${query}`,
-      { signal: thunkAPI.signal },
-    );
-
-    if (!res.ok) {
-      throw new Error('Failed when fetching movies data...');
-    }
-
-    const data = await res.json();
-
-    if (data.Response.toLowerCase() === 'false') {
-      throw new Error('Movies not found');
-    }
+    const data = await getMovies(query, thunkAPI.signal);
 
     return data;
   },
@@ -53,7 +39,7 @@ const moviesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchMovies.fulfilled, (state, action) => {
       state.movies = action.payload.Search;
-      state.status = 'idle';
+      state.status = 'success';
     });
     builder.addCase(fetchMovies.pending, (state) => {
       state.status = 'loading';

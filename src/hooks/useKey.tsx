@@ -5,12 +5,12 @@ export default function useKey({
   action,
 }: {
   key: string;
-  action: (query: string) => void;
+  action: () => void;
 }) {
   useEffect(
     function () {
       function callback(e: KeyboardEvent) {
-        if (e.code.toLowerCase() === key.toLowerCase()) action('');
+        if (e.code.toLowerCase() === key.toLowerCase()) action();
       }
 
       document.addEventListener('keydown', callback);
