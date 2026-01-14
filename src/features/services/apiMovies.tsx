@@ -1,16 +1,20 @@
 const PUBLIC_KEY = '4869cc13';
 
-async function getMovies(query: string, controller: AbortController) {
+export async function getMovies(query: string, signal: AbortSignal) {
   const res = await fetch(
     `http://www.omdbapi.com/?apikey=${PUBLIC_KEY}&s=${query}`,
-    { signal: controller.signal },
+    { signal: signal },
   );
 
   if (!res.ok) {
-    throw new Error('Searching movies failed...');
+    throw new Error('Failed when fetching movies data...');
   }
 
-  const data = await res.json();
+  const movies = await res.json();
 
-  return data;
+  if (movies.Response.toLowerCase() === 'false') {
+    throw new Error('Movies not found');
+  }
+
+  return movies;
 }

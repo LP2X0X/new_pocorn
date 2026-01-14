@@ -1,3 +1,4 @@
+import MoviesList from './features/movies/MoviesList';
 import Box from './ui/Box';
 import Header from './ui/Header';
 import StatusMessage from './ui/StatusMessage';
@@ -11,6 +12,7 @@ function App() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <StatusMessage />
           </div>
+          <MoviesList />
         </Box>
         <Box></Box>
       </main>

@@ -1,0 +1,17 @@
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store';
+import Movie from './Movie';
+
+export default function MoviesList() {
+  const { movies, status } = useSelector((state: RootState) => state.movies);
+
+  if (status !== 'success') return;
+
+  return (
+    <ul>
+      {movies.map((movie) => (
+        <Movie movie={movie} />
+      ))}
+    </ul>
+  );
+}
