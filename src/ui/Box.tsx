@@ -6,7 +6,7 @@ interface Props {
 
 export default function Box({ children }: Props) {
   return (
-    <div className="bg-background-500 w-md overflow-hidden rounded-lg bg-amber-200">
+    <div className="bg-background-500 relative w-md overflow-hidden rounded-lg bg-amber-200">
       {children}
     </div>
   );

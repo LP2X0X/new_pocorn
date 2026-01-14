@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import useKey from '../../hooks/useKey';
 import { useDispatch } from 'react-redux';
-import { fetchMovies } from './moviesSlice';
+import { fetchMovies, reset } from './moviesSlice';
 import type { AppDispatch } from '../../store';
 
 export default function SearchBox() {
-  const [query, setQuery] = useState<string>('');
+  const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -15,10 +15,16 @@ export default function SearchBox() {
 
   useKey({ key: 'Enter', action: setQuery });
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setQuery(e.target.value);
-    dispatch(fetchMovies(e.target.value));
-  }
+  useEffect(() => {
+    if (query === '') {
+      dispatch(reset());
+      return;
+    }
+
+    const promise = dispatch(fetchMovies(query));
+
+    return () => promise.abort();
+  }, [query, dispatch]);
 
   return (
     <input
@@ -26,7 +32,7 @@ export default function SearchBox() {
       placeholder="Search movies..."
       ref={inputRef}
       value={query}
-      onChange={handleChange}
+      onChange={(e) => setQuery(e.target.value)}
     />
   );
 }
