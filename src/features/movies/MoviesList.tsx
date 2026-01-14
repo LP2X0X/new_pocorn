@@ -8,7 +8,7 @@ export default function MoviesList() {
   if (status !== 'success') return;
 
   return (
-    <ul>
+    <ul className="h-full overflow-scroll">
       {movies.map((movie) => (
         <Movie movie={movie} />
       ))}

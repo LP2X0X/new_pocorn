@@ -7,7 +7,7 @@ type MovieProps = {
 
 export default function Movie({ movie }: MovieProps) {
   return (
-    <li className="grid grid-cols-[1fr_2fr]">
+    <li className="text-text grid grid-cols-[1fr_3fr]">
       <img
         src={movie.Poster}
         alt={`${movie.Title} Movie Poster`}
