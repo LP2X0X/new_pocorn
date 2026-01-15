@@ -1,4 +1,5 @@
 import MoviesList from './features/movies/MoviesList';
+import WatchedMoviesOverview from './features/movies/WatchedMoviesOverview';
 import Box from './ui/Box';
 import Header from './ui/Header';
 import StatusMessage from './ui/StatusMessage';
@@ -14,7 +15,9 @@ function App() {
           </div>
           <MoviesList />
         </Box>
-        <Box></Box>
+        <Box>
+          <WatchedMoviesOverview />
+        </Box>
       </main>
     </div>
   );
