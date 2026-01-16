@@ -6,8 +6,8 @@ interface Props {
 
 export default function Box({ children }: Props) {
   return (
-    <div className="bg-background-500 relative w-[45%] overflow-hidden rounded-lg">
+    <article className="bg-background-500 relative w-[45%] overflow-hidden rounded-lg">
       {children}
-    </div>
+    </article>
   );
 }
