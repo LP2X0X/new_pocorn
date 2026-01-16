@@ -9,7 +9,9 @@ export type Movie = {
   imdbID: string;
 };
 
-type Status = 'idle' | 'loading' | 'success' | 'error';
+export type Status = 'idle' | 'loading' | 'success' | 'error';
+
+type State = { movies: Array<Movie>; status: Status; error: any };
 
 export const fetchMovies = createAsyncThunk(
   `movies/fetchMovies`,
@@ -20,7 +22,7 @@ export const fetchMovies = createAsyncThunk(
   },
 );
 
-const initialState: { movies: Array<Movie>; status: Status; error: any } = {
+const initialState: State = {
   movies: [],
   status: 'idle',
   error: {},
