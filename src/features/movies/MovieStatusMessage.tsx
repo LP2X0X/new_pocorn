@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
-import type { RootState } from '../store';
+import type { RootState } from '../../store';
 
-export default function StatusMessage() {
+export default function MovieStatusMessage() {
   const { status, error } = useSelector((state: RootState) => state.movies);
 
   if (status === 'loading') {
