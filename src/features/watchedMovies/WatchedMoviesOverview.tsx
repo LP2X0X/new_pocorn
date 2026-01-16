@@ -4,7 +4,7 @@ import type { RootState } from '../../store';
 export default function WatchedMoviesOverview() {
   const {
     selectedMovieInfo: { id },
-  } = useSelector((state: RootState) => state.watchedMovies);
+  } = useSelector((state: RootState) => state.selectedMovies);
 
   if (!id)
     return (

@@ -1,10 +1,11 @@
 import MoviesList from './features/movies/MoviesList';
-import SelectedMovie from './features/watchedMovies/SelectedMovie';
+import SelectedMovie from './features/selectedMovie/SelectedMovie';
 import WatchedMoviesOverview from './features/watchedMovies/WatchedMoviesOverview';
 import Box from './ui/Box';
 import CenterContainer from './ui/CenterContainer';
 import Header from './ui/Header';
-import StatusMessage from './ui/StatusMessage';
+import MovieStatusMessage from './features/movies/MovieStatusMessage';
+import SelectedMovieStatusMessage from './features/selectedMovie/SelectedMovieStatusMessage';
 
 function App() {
   return (
@@ -13,11 +14,14 @@ function App() {
       <main className="flex h-full min-h-0 justify-center gap-4">
         <Box>
           <CenterContainer>
-            <StatusMessage />
+            <MovieStatusMessage />
           </CenterContainer>
           <MoviesList />
         </Box>
         <Box>
+          <CenterContainer>
+            <SelectedMovieStatusMessage />
+          </CenterContainer>
           <WatchedMoviesOverview />
           <SelectedMovie />
         </Box>

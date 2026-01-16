@@ -3,7 +3,7 @@ import type { Movie } from './moviesSlice';
 import {
   fetchMovieDetail,
   setSelectedMovieInfo,
-} from '../watchedMovies/watchedMoviesSlice';
+} from '../selectedMovie/selectedMoviesSlice';
 import type { AppDispatch } from '../../store';
 
 type MovieProps = {

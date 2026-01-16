@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getMovieDetail } from '../services/apiMovies';
+import { type Status } from '../movies/moviesSlice';
 
-interface WatchedMovie {
+interface SelectedMovie {
   Title: string;
   Year: string;
   Rated: string;
@@ -35,13 +36,15 @@ interface WatchedMovie {
 }
 
 type State = {
+  status: Status;
   selectedMovieInfo: { id: string; poster: string };
-  selectedMovieDetail: WatchedMovie;
+  selectedMovieDetail: SelectedMovie;
 };
 
 const initialState: State = {
+  status: 'idle',
   selectedMovieInfo: { id: '', poster: '' },
-  selectedMovieDetail: {} as WatchedMovie,
+  selectedMovieDetail: {} as SelectedMovie,
 };
 
 export const fetchMovieDetail = createAsyncThunk(
@@ -53,20 +56,32 @@ export const fetchMovieDetail = createAsyncThunk(
   },
 );
 
-const watchedMoviesSlice = createSlice({
+const selectedMoviesSlice = createSlice({
   name: 'watchedMovies',
   initialState,
   reducers: {
     setSelectedMovieInfo: (state, action) => {
       state.selectedMovieInfo = action.payload;
     },
+    resetSelectedMovieInfo: (state) => {
+      state.selectedMovieInfo = initialState.selectedMovieInfo;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchMovieDetail.fulfilled, (state, action) => {
+      state.status = 'success';
       state.selectedMovieDetail = action.payload;
+    });
+    builder.addCase(fetchMovieDetail.pending, (state) => {
+      state.status = 'loading';
+    });
+    builder.addCase(fetchMovieDetail.rejected, (state, action) => {
+      state.status = 'error';
+      console.log(action.payload);
     });
   },
 });
 
-export default watchedMoviesSlice.reducer;
-export const { setSelectedMovieInfo } = watchedMoviesSlice.actions;
+export default selectedMoviesSlice.reducer;
+export const { setSelectedMovieInfo, resetSelectedMovieInfo } =
+  selectedMoviesSlice.actions;
