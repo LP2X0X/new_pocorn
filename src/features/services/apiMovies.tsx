@@ -18,3 +18,18 @@ export async function getMovies(query: string, signal: AbortSignal) {
 
   return movies;
 }
+
+export async function getMovieDetail(selectedId: string, signal: AbortSignal) {
+  let res = await fetch(
+    `http://www.omdbapi.com/?apikey=${PUBLIC_KEY}&i=${selectedId}`,
+    { signal },
+  );
+
+  if (!res.ok) {
+    throw new Error('Failed when fetching movie detail...');
+  }
+
+  const movieDetail = await res.json();
+
+  return movieDetail;
+}

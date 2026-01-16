@@ -1,6 +1,8 @@
 import MoviesList from './features/movies/MoviesList';
-import WatchedMoviesOverview from './features/movies/WatchedMoviesOverview';
+import SelectedMovie from './features/watchedMovies/SelectedMovie';
+import WatchedMoviesOverview from './features/watchedMovies/WatchedMoviesOverview';
 import Box from './ui/Box';
+import CenterContainer from './ui/CenterContainer';
 import Header from './ui/Header';
 import StatusMessage from './ui/StatusMessage';
 
@@ -10,13 +12,14 @@ function App() {
       <Header></Header>
       <main className="flex h-full min-h-0 justify-center gap-4">
         <Box>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <CenterContainer>
             <StatusMessage />
-          </div>
+          </CenterContainer>
           <MoviesList />
         </Box>
         <Box>
           <WatchedMoviesOverview />
+          <SelectedMovie />
         </Box>
       </main>
     </div>
